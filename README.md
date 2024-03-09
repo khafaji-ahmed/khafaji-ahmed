@@ -1,7 +1,5 @@
 # 💫 About Me:
-🔭 I’m currently working on web apps<be>
-🌱 I’m currently learning .NET & Flutter<be>
-💬 Ask me about anything
+🔭 I’m currently working on web apps<be>🌱 I’m currently learning .NET & Flutter<be>💬 Ask me about anything
 
 
 # 💻 Tech Stack:
