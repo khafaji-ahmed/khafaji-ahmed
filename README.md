@@ -1,6 +1,5 @@
 # 💫 About Me:
-🔭 I’m currently working on web apps <br>
-🌱 I’m currently learning .NET & Flutter <br>
+🔭 Senior web & mobile app engineer<br>
 💬 Ask me about anything
 
 
