@@ -1,0 +1,766 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz@9..40&family=Montserrat&display=swap');
+
+:root {
+  --background: #212224;  
+  --first-color: #fcfaf4;
+  --second-color: #f5a623ff;
+  --third-color: #c7c8c8;
+  --fourth-color: #111111;
+  --tile-color: #343639;
+  --tile-hover-color: #444647;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--first-color);
+  font-family: "DM Sans", sans-serif;
+}
+
+/* Hamburger Menu Styles */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.hamburger {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #fcfaf4;
+  transition: all 0.3s ease;
+}
+
+.hamburger + .hamburger {
+  margin-top: 5px;
+}
+
+.menu-open .hamburger:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.menu-open .hamburger:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-open .hamburger:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+.button.navbar-item.original-get-in-touch {
+  font-family: Montserrat, DM Sans, sans-serif;
+}
+
+.button.navbar-item.contact-me {
+  font-family: Montserrat, DM Sans, sans-serif;
+}
+
+.about-me-description {
+  color: var(--third-color);
+}
+
+/* For Small Screens */
+@media screen and (max-width: 767px) {
+  .navbar {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .navbar-item {
+    opacity: 1;
+  }
+
+  .nav {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    top: 80px;
+    right: 80px;
+    background-color: var(--tile-color);
+    z-index: 10;
+    border-radius: 20px;
+    box-shadow: 0 0px 20px rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    transition: opacity 1s ease-in;
+  }
+
+  nav.show {
+    display: flex;
+    opacity: 1;
+  }
+
+  .navlink {
+    display: block;
+    margin: 10px;
+    text-align: center;
+    color: #fcfaf4;
+    text-decoration: none;
+  }
+
+  .menu-toggle {
+    display: block;
+    position: relative;
+    z-index: 20;
+  }
+
+  .menu-open .nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: flex-end;
+    width: 30vw;
+    height: auto;
+    padding: 10px;
+    opacity: 1;
+  }
+
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+  }
+
+  .tile-3 {
+    grid-column: span 1;
+  }
+
+  .tile-2 {
+    grid-column: span 1;
+  }
+
+  .tile {
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .original-get-in-touch {
+    display: none;
+  }
+}
+
+/* For Medium Screens */
+@media screen and (max-width: 1199px) and (min-width: 768px) {
+  .navbar-item {
+    opacity: 0;
+  }
+
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .tile-3 {
+    grid-column: span 2;
+  }
+
+  .tile-2 {
+    grid-column: span 2;
+  }
+
+  .tile {
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .original-get-in-touch {
+    display: block;
+  }
+}
+
+/* For Large Screens */
+@media screen and (min-width: 1200px) {
+  .navbar-item {
+    opacity: 0;
+  }
+
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .tile-3 {
+    grid-column: span 3;
+  }
+
+  .tile-2 {
+    grid-column: span 2;
+  }
+
+  .tile {
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .original-get-in-touch {
+    display: block;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1400px;
+}
+
+.name {
+  font-size: 2rem;
+  font-weight: 700;
+  opacity: 0;
+  transition: all 1.2s ease-out;
+}
+
+.name.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.navbar {
+  margin: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: var(--first-color);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.navbar a:hover {
+  color: var(--second-color);
+  transition: color 0.3s ease;
+}
+
+.nav {
+  display: flex;
+  gap: 30px;
+}
+
+.navbar-item.animate {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 1.2s ease-out;
+}
+
+.button {
+  background-color: var(--second-color);
+  color: var(--fourth-color);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background-color: #e6951f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(245, 166, 35, 0.3);
+}
+
+.tile {
+  background-color: var(--tile-color);
+  border-radius: 20px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.6s ease-out;
+  opacity: 0;
+  transform: translateY(50px);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tile.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tile:hover {
+  background-color: var(--tile-hover-color);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.selfie-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.right-arrow-icon {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  transition: transform 0.3s ease;
+}
+
+.tile:hover .right-arrow-icon {
+  transform: translateX(5px);
+}
+
+.user-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 10px;
+  color: var(--second-color);
+}
+
+.github-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 10px;
+  fill: var(--second-color);
+}
+
+.languages-img {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.resume-description {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--first-color);
+  margin-bottom: 10px;
+}
+
+.github-description {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--first-color);
+  margin-bottom: 10px;
+}
+
+.languages {
+  position: relative;
+}
+
+@media only screen and (max-width: 767px) {
+  .about-hero {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 20px 0;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1.2s ease-out;
+  }
+}
+
+@media screen and (max-width: 1199px) and (min-width: 768px) {
+  .about-hero {
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 30px 0;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1.2s ease-out;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .about-hero {
+    font-size: 3.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 40px 0;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1.2s ease-out;
+  }
+}
+
+.about-hero.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.image {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.Selfie {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.Setup {
+  flex: 1;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.intro {
+  text-align: center;
+}
+
+.occupation {
+  color: var(--third-color);
+  margin-top: 5px;
+}
+
+.experience-list {
+  list-style: none;
+  padding: 0;
+}
+
+.resume-sidebar {
+  flex: 1;
+}
+
+.resume-section {
+  flex: 2;
+  padding-left: 20px;
+}
+
+/* Resume specific styles */
+@media screen and (max-width: 767px) {
+  .container {
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .resume-sidebar {
+    width: 100%;
+  }
+
+  .resume-section {
+    width: 100%;
+    padding-left: 0;
+  }
+
+  .tiles-section {
+    padding: 0 20px;
+    margin-top: 20px;
+  }
+
+  .selfie {
+    width: 100px;
+    height: 100px;
+  }
+
+  .tile.intro {
+    height: auto;
+    min-height: 200px;
+  }
+
+  .tile.intro h1 {
+    font-size: 1.5rem;
+  }
+
+  .tile.intro h3 {
+    font-size: 1rem;
+  }
+
+  .resumePDF {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+@media screen and (max-width: 1199px) and (min-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 30px;
+    gap: 30px;
+  }
+
+  .resume-sidebar {
+    width: 100%;
+  }
+
+  .resume-section {
+    width: 100%;
+    padding-left: 0;
+  }
+
+  .tiles-section {
+    padding: 0 30px;
+    margin-top: 20px;
+  }
+
+  .tile.intro {
+    height: auto;
+    min-height: 250px;
+  }
+
+  .selfie {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .container {
+    display: flex;
+    padding: 40px;
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .resume-sidebar {
+    width: 300px;
+    flex-shrink: 0;
+  }
+
+  .resume-section {
+    flex: 1;
+    padding-left: 40px;
+  }
+
+  .tiles-section {
+    padding: 0 40px;
+    margin-top: 20px;
+  }
+
+  .tile.intro {
+    height: auto;
+    min-height: 280px;
+  }
+
+  .selfie {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+.resumePDF {
+  background-color: var(--second-color);
+  color: var(--fourth-color);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.resumePDF.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.tile.intro {
+  position: relative;
+  overflow: visible;
+}
+
+.selfie {
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.resume-part {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+.resume-part.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.email {
+  color: var(--second-color);
+  text-decoration: none;
+}
+
+.resume .description {
+  color: var(--third-color);
+}
+
+.small-intro-description {
+  color: var(--third-color);
+}
+
+.experience-list .job-title {
+  color: var(--second-color);
+  font-weight: bold;
+}
+
+.experience-list h4 {
+  color: var(--first-color);
+}
+
+.experience-list p {
+  color: var(--third-color);
+}
+
+.projects-list .job-title {
+  color: var(--second-color);
+  font-weight: bold;
+}
+
+.projects-list h4 {
+  color: var(--first-color);
+}
+
+.projects-list p {
+  color: var(--third-color);
+}
+
+.education-list h1 {
+  color: var(--first-color);
+  font-size: 1.2rem;
+}
+
+.education-list h2 {
+  color: var(--second-color);
+  font-size: 1rem;
+  margin-top: 5px;
+}
+
+.education-list h4 {
+  color: var(--third-color);
+  font-size: 0.9rem;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skills-list h1 {
+  background-color: var(--tile-color);
+  color: var(--first-color);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 767px) {
+  .skills-list {
+    gap: 8px;
+  }
+
+  .skills-list h1 {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+
+  .resume .description {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .resume h1 {
+    font-size: 1.1rem;
+  }
+
+  .job-title {
+    font-size: 1rem;
+  }
+
+  .experience-list, .projects-list {
+    margin-bottom: 20px;
+  }
+
+  .experience-list h4, .projects-list h4 {
+    font-size: 0.9rem;
+    margin: 5px 0;
+  }
+}
+
+@media screen and (max-width: 1199px) and (min-width: 768px) {
+  .skills-list {
+    gap: 10px;
+  }
+
+  .skills-list h1 {
+    font-size: 0.85rem;
+    padding: 7px 14px;
+  }
+
+  .resume .description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .job-title {
+    font-size: 1.1rem;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .skills-list {
+    gap: 12px;
+  }
+
+  .skills-list h1 {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+
+  .resume .description {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .job-title {
+    font-size: 1.2rem;
+  }
+}
