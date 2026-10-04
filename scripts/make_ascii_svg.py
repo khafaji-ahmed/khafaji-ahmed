@@ -22,11 +22,11 @@ import os
 from pathlib import Path
 
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageEnhance, ImageOps
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "source-prepped.png"
-OUT = ROOT / "avi-ascii.svg"
+OUT = ROOT / "ahmed-ascii.svg"
 
 # bright (sparse) -> dark (dense); leading space clears the background
 RAMP = " .`:-=+*cs#%@"
@@ -41,6 +41,22 @@ STATIC = os.environ.get("STATIC") == "1"
 
 
 def to_rows(img: Image.Image, cols: int) -> list[str]:
+    rgba = img.convert("RGBA")
+    alpha = rgba.getchannel("A")
+    bbox = alpha.point(lambda value: 255 if value > 8 else 0).getbbox()
+    if bbox:
+        left, top, right, bottom = bbox
+        margin = max(2, round(max(rgba.size) * 0.015))
+        rgba = rgba.crop((
+            max(0, left - margin),
+            max(0, top - margin),
+            min(rgba.width, right + margin),
+            min(rgba.height, bottom + margin),
+        ))
+    white = Image.new("RGBA", rgba.size, (255, 255, 255, 255))
+    img = Image.alpha_composite(white, rgba).convert("L")
+    img = ImageOps.autocontrast(img, cutoff=1)
+    img = ImageEnhance.Contrast(img).enhance(1.08)
     aspect = img.height / img.width
     # correct for tall terminal glyphs so the portrait isn't stretched
     rows = max(1, round(cols * aspect * (CELL_W / CELL_H)))
@@ -76,7 +92,7 @@ def render(rows: list[str]) -> str:
             f'x="0" y="{r * CELL_H}" width="5" height="{CELL_H - 2}" fill="{CURSOR_COLOR}"/>'
         )
 
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="ASCII portrait">
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="Animated ASCII portrait of Ahmed Khafaji">
 <style>
 .row {{ clip-path: inset(0 100% 0 0); animation-name: wipe; animation-timing-function: linear; animation-fill-mode: forwards; }}
 @keyframes wipe {{ to {{ clip-path: inset(0 0% 0 0); }} }}
@@ -94,7 +110,7 @@ def main() -> None:
     if not SRC.exists():
         print(f"missing {SRC} — run: python scripts/prep_photo.py <photo>", file=__import__("sys").stderr)
         raise SystemExit(1)
-    rows = to_rows(Image.open(SRC).convert("L"), COLS)
+    rows = to_rows(Image.open(SRC), COLS)
     OUT.write_text(render(rows), encoding="utf-8")
     print(f"wrote {OUT} ({len(rows)} rows x {COLS} cols)")
 

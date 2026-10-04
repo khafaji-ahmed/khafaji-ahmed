@@ -30,7 +30,7 @@ CELL = 10
 GAP = 3
 PITCH = CELL + GAP
 GUTTER_L = 30  # weekday labels
-GUTTER_T = 22  # month labels
+GUTTER_T = 38  # room for the title, legend, and month labels
 FOOTER_H = 66
 
 STATIC = os.environ.get("STATIC") == "1"
@@ -84,18 +84,21 @@ def render() -> str:
     width = GUTTER_L + grid_w + 14
     grid_h = 7 * PITCH
     height = GUTTER_T + grid_h + FOOTER_H
-    legend_w = 118
+    legend_w = 160
     legend_x = width - legend_w - 10
 
+    styles = (
+        ".day { opacity: 1; } .fadein { opacity: 1; }"
+        if STATIC
+        else ".day { opacity: 0; transform: translateY(-7px); animation: drop .4s cubic-bezier(.2,.7,.3,1) forwards; }"
+        "@keyframes drop { to { opacity: 1; transform: translateY(0); } }"
+        ".fadein { opacity: 0; animation: fade .6s ease forwards; }"
+        "@keyframes fade { to { opacity: 1; } }"
+    )
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
         f'viewBox="0 0 {width} {height}" role="img" aria-label="Contribution heatmap">',
-        "<style>",
-        ".day { opacity: 0; transform: translateY(-7px); animation: drop .4s cubic-bezier(.2,.7,.3,1) forwards; }",
-        "@keyframes drop { to { opacity: 1; transform: translateY(0); } }",
-        ".fadein { opacity: 0; animation: fade .6s ease forwards; }",
-        "@keyframes fade { to { opacity: 1; } }",
-        "</style>",
+        f"<style>{styles}</style>",
         f'<rect width="100%" height="100%" rx="10" fill="{BG}" stroke="{BORDER}"/>',
         # header + legend
         f'<text class="fadein" x="12" y="15" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" '

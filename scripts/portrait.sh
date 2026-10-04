@@ -16,4 +16,4 @@ cd "$(dirname "$0")/.."
 SRC="${1:-source-photo.png}"
 .venv/bin/python scripts/prep_photo.py "$SRC" --clahe 0 --white 55 --gamma 0.9
 .venv/bin/python scripts/make_ascii_svg.py
-echo "done: commit avi-ascii.svg when you like the result"
+echo "done: commit ahmed-ascii.svg when you like the result"
