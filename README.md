@@ -4,8 +4,8 @@
 
 <table>
   <tr>
-    <td valign="top"><img src="./ahmed-ascii.svg" width="370" alt="Animated ASCII portrait of Ahmed Khafaji" /></td>
-    <td valign="top"><img src="./info-card.svg" width="490" alt="Animated terminal profile card" /></td>
+    <td valign="top"><img src="./ahmed-ascii.svg" width="430" alt="Animated color ASCII portrait of Ahmed Khafaji" /></td>
+    <td valign="top"><img src="./info-card.svg" width="430" alt="Animated terminal profile card" /></td>
   </tr>
 </table>
 
