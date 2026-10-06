@@ -1,5 +1,1 @@
-# portrait-only — not needed by the daily workflow (run locally, needs a CPython with wheels)
-pillow
-numpy
-opencv-python
-rembg
+Pillow>=10.4,<13
